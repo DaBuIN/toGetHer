@@ -26,11 +26,8 @@ class testVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return meals[row]
-        print(meals[0])
-        print(meals[1])
-        print(meals[2])
-        
+                return meals[row]
+       
     }
     
     
@@ -68,7 +65,7 @@ class testVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
         let myPickerView = UIPickerView()
         
         myPickerView.dataSource = self
-        myPickerView.dataSource = self
+        myPickerView.delegate = self
         
         
         

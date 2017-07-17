@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1442BDAD1F1D1BAD00167AB9 /* classPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442BDAC1F1D1BAD00167AB9 /* classPickerVC.swift */; };
 		1442BDAF1F1D24A000167AB9 /* testVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442BDAE1F1D24A000167AB9 /* testVC.swift */; };
-		1442BDB11F1D27D100167AB9 /* classTextFieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442BDB01F1D27D100167AB9 /* classTextFieldVC.swift */; };
 		14AAD73E1F1C694F00BC6E9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AAD73D1F1C694F00BC6E9E /* AppDelegate.swift */; };
 		14AAD7401F1C694F00BC6E9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AAD73F1F1C694F00BC6E9E /* ViewController.swift */; };
 		14AAD7431F1C694F00BC6E9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14AAD7411F1C694F00BC6E9E /* Main.storyboard */; };
@@ -21,7 +20,6 @@
 /* Begin PBXFileReference section */
 		1442BDAC1F1D1BAD00167AB9 /* classPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classPickerVC.swift; sourceTree = "<group>"; };
 		1442BDAE1F1D24A000167AB9 /* testVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testVC.swift; sourceTree = "<group>"; };
-		1442BDB01F1D27D100167AB9 /* classTextFieldVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classTextFieldVC.swift; sourceTree = "<group>"; };
 		14AAD73A1F1C694F00BC6E9E /* together.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = together.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14AAD73D1F1C694F00BC6E9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14AAD73F1F1C694F00BC6E9E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 				14F439531F1CA27D0060D839 /* openGroupVC.swift */,
 				1442BDAC1F1D1BAD00167AB9 /* classPickerVC.swift */,
 				1442BDAE1F1D24A000167AB9 /* testVC.swift */,
-				1442BDB01F1D27D100167AB9 /* classTextFieldVC.swift */,
 			);
 			path = together;
 			sourceTree = "<group>";
@@ -152,7 +149,6 @@
 				14AAD7401F1C694F00BC6E9E /* ViewController.swift in Sources */,
 				1442BDAF1F1D24A000167AB9 /* testVC.swift in Sources */,
 				14AAD73E1F1C694F00BC6E9E /* AppDelegate.swift in Sources */,
-				1442BDB11F1D27D100167AB9 /* classTextFieldVC.swift in Sources */,
 				14F439541F1CA27D0060D839 /* openGroupVC.swift in Sources */,
 				1442BDAD1F1D1BAD00167AB9 /* classPickerVC.swift in Sources */,
 			);
