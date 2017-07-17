@@ -14,6 +14,8 @@ class openGroupVC: UIViewController {
         super.viewDidLoad()
 
         
+        //7 commit
+        
         //dev
         // Do any additional setup after loading the view.
     }
