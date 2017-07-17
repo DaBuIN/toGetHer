@@ -13,6 +13,8 @@ class openGroupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        //dev
         // Do any additional setup after loading the view.
     }
 
