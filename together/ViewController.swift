@@ -10,6 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    @IBAction func home(_sender:UIStoryboardSegue){
+    
+    print("back home")
+    }
+    
+    
+    
+    
     ///test branch testt2
     
     
