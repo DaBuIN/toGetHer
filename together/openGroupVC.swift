@@ -6,6 +6,9 @@
 //  Copyright © 2017年 Seven Tsai. All rights reserved.
 //
 
+
+
+///////////**********開揪團頁面
 import UIKit
 
 
@@ -79,14 +82,14 @@ var formatter: DateFormatter! = nil
     }
     
     
-    
+    ////////////datePicker的實作
     func datePickerChanged(datePicker:UIDatePicker) {
         // 依據元件的 tag 取得 UITextField
         
-        
+        //指定tag
         let textField = self.view.viewWithTag(200) as? UILabel
         
-        
+        //改變日期時 文字也改變
         textField?.text = formatter.string(for: datePicker.date)
         
         
@@ -95,6 +98,11 @@ var formatter: DateFormatter! = nil
     
     
     
+  
+    
+
+    
+   
     
     
     
@@ -141,13 +149,15 @@ var formatter: DateFormatter! = nil
         let myDatePicker = UIDatePicker()
         
         //模式
-        myDatePicker.datePickerMode = .date
+        myDatePicker.datePickerMode = .dateAndTime
         
         //時區
         //        myDatePicker.locale = NSLocale(localeIdentifier: "zh_TW")
         
         //預設日期
-        myDatePicker.date = Date()
+        
+        
+//        myDatePicker.date = Date()
         
         myDatePicker.addTarget(self, action: #selector(datePickerChanged), for: UIControlEvents.valueChanged)
         
@@ -155,14 +165,18 @@ var formatter: DateFormatter! = nil
         textField.inputView = myDatePicker
         
         //預設內容
-        textField.text = formatter.string(from: myDatePicker.date)
+//        textField.text = formatter.string(from: myDatePicker.date)
         
         textField.tag = 200
     
     }
     
     
-    
+    //隱藏鍵盤手勢
+    func hideKeyborad(tapG: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
 
 
     
@@ -172,46 +186,6 @@ var formatter: DateFormatter! = nil
 
         let fullScreenSize = UIScreen.main.bounds.size
 
-//       formatter = DateFormatter()   //date picker 初始化 日期格式
-//        formatter.dateFormat = "yyyy 年 MM 月 dd 日"
-////        formatter.dateFormat = "yyyy 年 MM 月 dd 日 h 時 m 分"
-//        
-//        
-//        
-//       
-//        
-//        //實作一個date picker
-//        let myDatePicker = UIDatePicker()
-//        
-//        //模式
-//        myDatePicker.datePickerMode = .date
-//    
-//        //時區
-////        myDatePicker.locale = NSLocale(localeIdentifier: "zh_TW")
-//        
-//        //預設日期
-//        myDatePicker.date = Date()
-//        
-//        myDatePicker.addTarget(self, action: #selector(datePickerChanged), for: UIControlEvents.valueChanged)
-//        
-//        //鍵盤置換
-//        textFieldStartDate.inputView = myDatePicker
-//        
-//        //預設內容
-//        textFieldStartDate.text = formatter.string(from: myDatePicker.date)
-//        
-//        textFieldStartDate.tag = 200
-//        
-        
-        
-     
-        
-        
-    
-        
-        
-        
-        
         
         listClass.append("美食")
         listClass.append("運動")
@@ -227,6 +201,16 @@ var formatter: DateFormatter! = nil
         //enddate picker
         setDatePicker(textField: textFieldEndDate)
         
+        
+        
+        /////////點擊空白返回鍵盤(被我們改為picker了)
+
+        let tapBack = UITapGestureRecognizer(target: self, action: #selector(hideKeyborad(tapG:)))
+        
+       
+        tapBack.cancelsTouchesInView = false
+        
+        self.view.addGestureRecognizer(tapBack)
         
           }
 
