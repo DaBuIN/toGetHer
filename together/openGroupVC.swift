@@ -30,6 +30,7 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     var selectClass:String?  //class select的資料儲存
 
     var formatter: DateFormatter! = nil
+    var formatter2: DateFormatter! = nil
 
     var subject:String?
     var location:String?
@@ -44,62 +45,9 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     
     
     
-    //////////Class Picker
-    //幾個滾筒
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    //多少筆資料
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        if component == 0 {
-        return listClass.count
-//        }
-    }
-    
-    //資料內容
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        if component == 0 {
-        
-        return listClass[row]
-        }
-//    }
-    
-    //使用者選擇的資料
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 0 {
-        
-        
-            
-            
-            let field  = self.view.viewWithTag(100) as? UITextField
-            
-            field?.text = listClass[row]
-            
-//        print("selectClass:\(listClass[row])")
-            
-            classType = field?.text
-
-            
-            print("select:\(classType!)")
-        
-        }
-    }
     
     
-    ////////////datePicker的實作
-    func datePickerChanged(datePicker:UIDatePicker) {
-        // 依據元件的 tag 取得 UITextField
-        
-        //指定tag
-        let textField = self.view.viewWithTag(200) as? UILabel
-        
-        //改變日期時 文字也改變
-        textField?.text = formatter.string(for: datePicker.date)
-        
-        starttime = textField?.text
-    }
+    
     
     
     
@@ -112,19 +60,19 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         location = "我家"
         
         if detail == nil {
-            detail = "123"
+            detail = "I'mDetail"
         }else{
                     detail = textViewDetail.text
         }
 
         
-        subjectpic = "123"
+        subjectpic = "nopic"
         
         
         print(subject!)
         print(location!)
-        print(starttime)
-        print(endtime)
+        print(starttime!)
+        print(endtime!)
         print(classType!)
         print(detail!)
         print(subjectpic!)
@@ -132,7 +80,7 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         let url = URL(string: "https://together-seventsai.c9users.io/opentSubject.php")
         let session = URLSession(configuration: .default)
         var req = URLRequest(url: url!)
-        req.httpBody = "subject=\(subject!)&location=\(location!)&starttime=\(starttime)&endtime=\(endtime)&class=\(classType!)&detail=\(detail!)&subjectpic=\(subjectpic!)".data(using: .utf8)
+        req.httpBody = "subject=\(subject!)&location=\(location!)&starttime=\(starttime!)&endtime=\(endtime!)&class=\(classType!)&detail=\(detail!)&subjectpic=\(subjectpic!)".data(using: .utf8)
         req.httpMethod = "POST"
         
         
@@ -159,12 +107,7 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
    
     
     
-    
-    
-    
-    
-    
-    // class Picker API
+    // class Picker API。建構一個classPicker
     func setClassPicker(array:Array<String>){
     
         ////////////class PickerView 用
@@ -193,15 +136,69 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         classTextField.tag = 100
     }
     
-    //////////DatePicker API
-    func setDatePicker(textField:UITextField){
+    
+    //////////Class Picker 實作
+    //幾個滾筒
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    //多少筆資料
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        //        if component == 0 {
+        return listClass.count
+        //        }
+    }
+    
+    //資料內容
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        //        if component == 0 {
+        
+        return listClass[row]
+    }
+    //    }
+    
+    //使用者選擇的資料
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            
+            
+            
+            
+            let field  = self.view.viewWithTag(100) as? UITextField
+            
+            field?.text = listClass[row]
+            
+            //        print("selectClass:\(listClass[row])")
+            
+            classType = field?.text
+            
+            
+            print("select:\(classType!)")
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //////////DatePicker API  建構一個datePicker 取代鍵盤
+    func setStartDatePicker(textField:UITextField){
         formatter = DateFormatter()   //date picker 初始化 日期格式
-        formatter.dateFormat = "yyyy 年 MM 月 dd 日"
-        //        formatter.dateFormat = "yyyy 年 MM 月 dd 日 h 時 m 分"
+        formatter.dateFormat = "yyyy年MM月dd日HH時mm分"
         
         
         var textField = textField
-//        var dateType:String? = dateType
         
         //實作一個date picker
         let myDatePicker = UIDatePicker()
@@ -210,14 +207,14 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         myDatePicker.datePickerMode = .dateAndTime
         
         //時區
-        //        myDatePicker.locale = NSLocale(localeIdentifier: "zh_TW")
+                myDatePicker.locale = Locale(identifier: "zh_TW")
         
         //預設日期
         
         
         myDatePicker.date = Date()
         
-        myDatePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
+        myDatePicker.addTarget(self, action: #selector(datePickerChanged(datePicker:)), for: .valueChanged)
         
         //鍵盤置換
         textField.inputView = myDatePicker
@@ -228,9 +225,106 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         textField.tag = 200
     
         
-        
+        //讓變數starttime 取得改變後的值 以利後續傳值至後端
         starttime = textField.text!
     }
+    
+    
+    ////////////datePicker的實作
+    
+    
+    //startDatePicker 實作
+    func datePickerChanged(datePicker:UIDatePicker) {
+        // 依據元件的 tag 取得 UITextField
+        
+        //指定tag
+        let textField = self.view.viewWithTag(200) as? UITextField
+//        let textField2 = self.view.viewWithTag(300) as? UITextField
+        
+        //改變日期時 文字也改變
+        textField?.text = formatter.string(for: datePicker.date)
+//        textField2?.text = formatter2.string(from: datePicker.date)
+        //        starttime = textField?.text
+        
+        //讓變數starttime 取得改變後的值 以利後續傳值至後端
+        starttime = textField?.text!
+
+    }
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // endDatePicker 的 API  建構一個mydatePicker2
+    func setEndDatePicker(textField:UITextField){
+        formatter2 = DateFormatter()   //date picker 初始化 日期格式
+        formatter2.dateFormat = "yyyy年MM月dd日HH時mm分"
+        
+        
+        var textField2 = textField
+        
+        //實作一個date picker
+        let myDatePicker2 = UIDatePicker()
+        
+        //模式
+        myDatePicker2.datePickerMode = .dateAndTime
+        
+        //時區
+                myDatePicker2.locale = Locale(identifier: "zh_TW")
+        
+        //預設日期
+        
+        
+        myDatePicker2.date = Date()
+        
+        myDatePicker2.addTarget(self, action: #selector(datePickerChanged2(datePicker:)), for: .valueChanged)
+        
+        //鍵盤置換
+        textField2.inputView = myDatePicker2
+        
+        //預設內容
+        textField2.text = formatter2.string(from: myDatePicker2.date)
+        
+        textField2.tag = 300
+        
+        
+        //讓變數endtime 取得改變後的值 以利後續傳值至後端
+                endtime = textField2.text!
+    }
+    
+    
+    //endDatePicker 實作
+    func datePickerChanged2(datePicker:UIDatePicker) {
+        // 依據元件的 tag 取得 UITextField
+        
+        //指定tag
+        //        let textField = self.view.viewWithTag(200) as? UITextField
+        let textField2 = self.view.viewWithTag(300) as? UITextField
+        
+        //改變日期時 文字也改變
+        //        textField?.text = formatter.string(for: datePicker.date)
+        textField2?.text = formatter2.string(from: datePicker.date)
+        //        starttime = textField?.text
+        
+        //讓變數endtime 取得改變後的值 以利後續傳值至後端
+
+        endtime = textField2?.text
+    }
+    
+    
+    
+    
+    
+    
     
     
     //隱藏鍵盤手勢
@@ -259,9 +353,9 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         
         //startdate picker  參數為 要作為點選的textfield 與  要紀錄的變數
         
-        setDatePicker(textField: textFieldStartDate)
+        setStartDatePicker(textField: textFieldStartDate)
         //enddate picker
-//        setDatePicker(textField: textFieldEndDate, dateType: endtime!)
+        setEndDatePicker(textField: textFieldEndDate)
         
         
         
