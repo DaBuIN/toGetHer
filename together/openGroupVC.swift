@@ -15,26 +15,32 @@ import UIKit
 //因委託給自己所以要加  UIPickerViewDelegate, UIPickerViewDataSource
 class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 //    @IBOutlet weak var pickerClass: UIPickerView!
+    @IBOutlet weak var textFieldSubject: UITextField!
+    @IBOutlet weak var imgViewSubject: UIImageView!
     @IBOutlet weak var classLabel: UILabel!
     @IBOutlet weak var classTextField: UITextField!
     @IBOutlet weak var LabelStartTime: UILabel!
     @IBOutlet weak var LabelEndTime: UILabel!
     @IBOutlet weak var textFieldStartDate: UITextField!
     @IBOutlet weak var textFieldEndDate: UITextField!
+    @IBOutlet weak var textViewDetail: UITextView!
 
-    var listClass = [String]()
-    
-    
-   
+    var listClass = [String]()  //class list的空陣列
 
     var selectClass:String?  //class select的資料儲存
- 
 
-    
-var formatter: DateFormatter! = nil
+    var formatter: DateFormatter! = nil
 
+    var subject:String?
+    var location:String?
+    var starttime:String?
+    var endtime:String?
+    var classType:String?
+    var detail:String?
+    var subjectpic:String?
     
   
+   
     
     
     
@@ -71,12 +77,12 @@ var formatter: DateFormatter! = nil
             
             field?.text = listClass[row]
             
-        print("selectClass:\(listClass[row])")
+//        print("selectClass:\(listClass[row])")
             
-            selectClass = listClass[row]
+            classType = field?.text
 
             
-            print("\(selectClass!)")
+            print("select:\(classType!)")
         
         }
     }
@@ -92,13 +98,61 @@ var formatter: DateFormatter! = nil
         //改變日期時 文字也改變
         textField?.text = formatter.string(for: datePicker.date)
         
-        
+        starttime = textField?.text
     }
     
     
     
-    
-  
+    /////////submit
+    @IBAction func submit(_ sender: Any) {
+        
+        
+        
+        subject = textFieldSubject.text
+        location = "我家"
+        
+        if detail == nil {
+            detail = "123"
+        }else{
+                    detail = textViewDetail.text
+        }
+
+        
+        subjectpic = "123"
+        
+        
+        print(subject!)
+        print(location!)
+        print(starttime)
+        print(endtime)
+        print(classType!)
+        print(detail!)
+        print(subjectpic!)
+        
+        let url = URL(string: "https://together-seventsai.c9users.io/opentSubject.php")
+        let session = URLSession(configuration: .default)
+        var req = URLRequest(url: url!)
+        req.httpBody = "subject=\(subject!)&location=\(location!)&starttime=\(starttime)&endtime=\(endtime)&class=\(classType!)&detail=\(detail!)&subjectpic=\(subjectpic!)".data(using: .utf8)
+        req.httpMethod = "POST"
+        
+        
+        
+        
+        let task = session.dataTask(with: req, completionHandler: {(data,response,error) in
+            if error == nil {
+                
+                print("add success")
+                
+                
+            }else{ print(error)}
+            
+            
+        })
+        
+        
+        
+        
+    }
     
 
     
@@ -132,18 +186,22 @@ var formatter: DateFormatter! = nil
         classTextField.text = array[0]
         
         
+        //讓classType(傳值用)
+        classType = classTextField.text
+        
+        
         classTextField.tag = 100
     }
     
-    
+    //////////DatePicker API
     func setDatePicker(textField:UITextField){
         formatter = DateFormatter()   //date picker 初始化 日期格式
         formatter.dateFormat = "yyyy 年 MM 月 dd 日"
         //        formatter.dateFormat = "yyyy 年 MM 月 dd 日 h 時 m 分"
         
         
-        let textField = textField
-        
+        var textField = textField
+//        var dateType:String? = dateType
         
         //實作一個date picker
         let myDatePicker = UIDatePicker()
@@ -157,18 +215,21 @@ var formatter: DateFormatter! = nil
         //預設日期
         
         
-//        myDatePicker.date = Date()
+        myDatePicker.date = Date()
         
-        myDatePicker.addTarget(self, action: #selector(datePickerChanged), for: UIControlEvents.valueChanged)
+        myDatePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
         
         //鍵盤置換
         textField.inputView = myDatePicker
         
         //預設內容
-//        textField.text = formatter.string(from: myDatePicker.date)
+        textField.text = formatter.string(from: myDatePicker.date)
         
         textField.tag = 200
     
+        
+        
+        starttime = textField.text!
     }
     
     
@@ -196,10 +257,11 @@ var formatter: DateFormatter! = nil
         ////////////class PickerView 用
         setClassPicker(array: listClass)
         
-        //startdate picker
+        //startdate picker  參數為 要作為點選的textfield 與  要紀錄的變數
+        
         setDatePicker(textField: textFieldStartDate)
         //enddate picker
-        setDatePicker(textField: textFieldEndDate)
+//        setDatePicker(textField: textFieldEndDate, dateType: endtime!)
         
         
         

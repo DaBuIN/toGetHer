@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140FC4051F1DECBF00D92250 /* balls.png in Resources */ = {isa = PBXBuildFile; fileRef = 140FC4041F1DECBF00D92250 /* balls.png */; };
 		1442BDAD1F1D1BAD00167AB9 /* classPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442BDAC1F1D1BAD00167AB9 /* classPickerVC.swift */; };
 		1442BDAF1F1D24A000167AB9 /* testVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442BDAE1F1D24A000167AB9 /* testVC.swift */; };
 		14AAD73E1F1C694F00BC6E9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AAD73D1F1C694F00BC6E9E /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		140FC4041F1DECBF00D92250 /* balls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balls.png; sourceTree = "<group>"; };
 		1442BDAC1F1D1BAD00167AB9 /* classPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classPickerVC.swift; sourceTree = "<group>"; };
 		1442BDAE1F1D24A000167AB9 /* testVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testVC.swift; sourceTree = "<group>"; };
 		14AAD73A1F1C694F00BC6E9E /* together.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = together.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140FC4031F1DEC9A00D92250 /* imgs */ = {
+			isa = PBXGroup;
+			children = (
+				140FC4041F1DECBF00D92250 /* balls.png */,
+			);
+			name = imgs;
+			sourceTree = "<group>";
+		};
 		14AAD7311F1C694F00BC6E9E = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +70,7 @@
 		14AAD73C1F1C694F00BC6E9E /* together */ = {
 			isa = PBXGroup;
 			children = (
+				140FC4031F1DEC9A00D92250 /* imgs */,
 				14AAD73D1F1C694F00BC6E9E /* AppDelegate.swift */,
 				14AAD73F1F1C694F00BC6E9E /* ViewController.swift */,
 				14AAD7411F1C694F00BC6E9E /* Main.storyboard */,
@@ -135,6 +146,7 @@
 			files = (
 				14AAD7481F1C694F00BC6E9E /* LaunchScreen.storyboard in Resources */,
 				14AAD7451F1C694F00BC6E9E /* Assets.xcassets in Resources */,
+				140FC4051F1DECBF00D92250 /* balls.png in Resources */,
 				14AAD7431F1C694F00BC6E9E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
