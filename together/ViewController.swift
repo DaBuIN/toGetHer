@@ -25,6 +25,16 @@ class ViewController: UIViewController {
 
     // test commit by Dylan
     
+    
+    
+    @IBAction func Gotomyile(_ sender: Any) {
+        //let vc = storyboard?.instantiateViewController(withIdentifier: "MainView")
+       // show(vc!, sender: self)
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MyfileViewController1")
+        show(vc!, sender: self)
+    }
+    
     @IBOutlet weak var login: UIButton!
   
     @IBOutlet weak var register: UIButton!
