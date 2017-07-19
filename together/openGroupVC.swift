@@ -13,8 +13,9 @@ import UIKit
 
 
 //因委託給自己所以要加  UIPickerViewDelegate, UIPickerViewDataSource
-class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 //    @IBOutlet weak var pickerClass: UIPickerView!
+    @IBOutlet weak var btnPicOutlet: UIButton!
     @IBOutlet weak var textFieldSubject: UITextField!
     @IBOutlet weak var imgViewSubject: UIImageView!
     @IBOutlet weak var classLabel: UILabel!
@@ -42,12 +43,103 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     
   
    
+
+    
+    ////拍照按鈕
+    @IBAction func btnTakePic(_ sender: AnyObject) {
+    
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "使用相機", style: .default, handler: {(action) in
+            openCamera()
+        })
+        let libraryAction = UIAlertAction(title: "使用相簿", style: .default, handler: {(action) in
+            openLibrary()
+            
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .destructive, handler: {(action) in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        
+        alertController.addAction(cameraAction)
+            alertController.addAction(libraryAction)
+        alertController.addAction(cancelAction)
+        
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = view as? UIView
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY, width: 0, height: 0)
+            
+        }
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+      
+        
+        //相機拍照
+        
+        func openCamera(){
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+        
+            let imgPickerTakeVC = UIImagePickerController()
+            imgPickerTakeVC.sourceType = .camera
+            imgPickerTakeVC.delegate = self
+            
+            show(imgPickerTakeVC, sender: self)
+            
+            }
+        }
+        
+       //取library
+        func openLibrary(){
+        let imgPickGetVC = UIImagePickerController()
+        imgPickGetVC.sourceType = .photoLibrary
+        imgPickGetVC.delegate = self
+        
+        //規定要跳出
+            
+            if let popoverController = alertController.popoverPresentationController {
+                popoverController.sourceView = view as? UIView
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                
+            }
+            present(imgPickGetVC, animated: true, completion: nil)
+            
+            
+//        imgPickGetVC.modalPresentationStyle = .popover
+//        let popover = imgPickGetVC.popoverPresentationController
+//        popover?.sourceView = self.view as? UIView
+//        
+//        popover?.sourceRect = self.view.bounds
+//        popover?.permittedArrowDirections = .any
+//        
+//        show(imgPickGetVC, sender: self)
+        
+        
+        }
+    
+    }
+    
+    //拍照finish 實作
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let imgTaken = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        UIImageWriteToSavedPhotosAlbum(imgTaken, nil, nil, nil)
+        dismiss(animated: true, completion: nil)
+
+    }
+    
+    //拍照cancel 實作
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
     
     
-    
-    
+    //
+
     
     
     
@@ -77,7 +169,7 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         print(detail!)
         print(subjectpic!)
         
-        let url = URL(string: "https://together-seventsai.c9users.io/opentSubject.php")
+        let url = URL(string: "https://together-seventsai.c9users.io/openSubject.php")
         let session = URLSession(configuration: .default)
         var req = URLRequest(url: url!)
         req.httpBody = "subject=\(subject!)&location=\(location!)&starttime=\(starttime!)&endtime=\(endtime!)&class=\(classType!)&detail=\(detail!)&subjectpic=\(subjectpic!)".data(using: .utf8)
@@ -88,7 +180,7 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         
         let task = session.dataTask(with: req, completionHandler: {(data,response,error) in
             if error == nil {
-                
+            
                 print("add success")
                 
                 
@@ -97,7 +189,7 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             
         })
         
-        
+        task.resume()
         
         
     }
@@ -338,7 +430,12 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+//        let imgBtn = UIImage(named: "cat.png")
+//        
+//        btnPicOutlet.setImage(imgBtn, for: .normal)
+        
+        
+        
         let fullScreenSize = UIScreen.main.bounds.size
 
         
