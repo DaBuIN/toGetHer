@@ -261,19 +261,22 @@
                                 <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Qc5-YA-T2G">
-                                        <rect key="frame" x="-0.5" y="49.5" width="375" height="896"/>
+                                        <rect key="frame" x="-0.5" y="49.5" width="375" height="768"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBU-XR-ql9">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psh-JF-JWj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="128"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="128"/>
                                                         <state key="normal" title="Button"/>
                                                         <connections>
                                                             <action selector="btnTakePic:" destination="3zc-2m-efB" eventType="touchUpInside" id="VVm-p7-uOu"/>
                                                         </connections>
                                                     </button>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ekV-nm-LwH">
+                                                        <rect key="frame" x="50" y="0.0" width="240" height="128"/>
+                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="主題" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxl-X1-JZu">
                                                         <rect key="frame" x="290" y="0.0" width="35" height="128"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -352,9 +355,6 @@
                                                     </textView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4lA-uj-IFW">
-                                                <rect key="frame" x="0.0" y="768" width="375" height="128"/>
-                                            </stackView>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-Uz-j6U">
@@ -388,6 +388,7 @@
                         <outlet property="btnPicOutlet" destination="psh-JF-JWj" id="O4E-uc-yba"/>
                         <outlet property="classLabel" destination="oFC-nx-OXl" id="npb-zU-iUo"/>
                         <outlet property="classTextField" destination="eDk-yD-VPa" id="lg0-RF-xUZ"/>
+                        <outlet property="imgViewSubject" destination="ekV-nm-LwH" id="APr-5a-D8O"/>
                         <outlet property="textFieldEndDate" destination="XXa-Iu-Spj" id="EBD-tx-QbV"/>
                         <outlet property="textFieldStartDate" destination="w6m-sX-BSv" id="ebk-22-4BI"/>
                         <outlet property="textFieldSubject" destination="NhR-3t-XNb" id="2au-gi-B3h"/>

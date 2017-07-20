@@ -15,9 +15,9 @@ import UIKit
 //因委託給自己所以要加  UIPickerViewDelegate, UIPickerViewDataSource
 class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 //    @IBOutlet weak var pickerClass: UIPickerView!
+    @IBOutlet weak var imgViewSubject: UIImageView!
     @IBOutlet weak var btnPicOutlet: UIButton!
     @IBOutlet weak var textFieldSubject: UITextField!
-    @IBOutlet weak var imgViewSubject: UIImageView!
     @IBOutlet weak var classLabel: UILabel!
     @IBOutlet weak var classTextField: UITextField!
     @IBOutlet weak var LabelStartTime: UILabel!
@@ -125,7 +125,100 @@ class openGroupVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let imgTaken = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        UIImageWriteToSavedPhotosAlbum(imgTaken, nil, nil, nil)
+//        imgViewSubject.image = imgTaken
+        
+        //將UIImage 變為 jpeg   即為data
+        let imgData = UIImageJPEGRepresentation(imgTaken, 0.3)
+
+    
+        
+        
+        
+        
+            let imgDataBase64 =  imgData?.base64EncodedData()
+        
+            let imgDataBase64String = imgData?.base64EncodedString()
+        
+
+//            print("aaaaaaa\(imgDataBase64)")
+        
+        print("bbbbbbbbbb\(imgDataBase64String!)")
+        
+        
+//
+//    print(imgDataBase64String)
+//
+        let url = URL(string: "https://together-seventsai.c9users.io/testPhoto.php")
+//
+        let session = URLSession(configuration: .default)
+        var req = URLRequest(url: url!)
+        req.httpBody = "data=\(imgDataBase64String!)".data(using: .utf8)
+        req.httpMethod = "POST"
+        
+        let task = session.dataTask(with: req, completionHandler: {(data,response,error) in
+            if error != nil{
+            print(data)
+            }
+            
+        })
+        
+        
+        
+        
+                task.resume()
+        
+        
+        
+      
+        //順便存為相簿圖檔
+//       let imgInLib = UIImageWriteToSavedPhotosAlbum(imgTaken, nil, nil, nil)
+        
+        
+        
+        //將相片儲存到雲端
+        
+      //https://together-seventsai.c9users.io/photo/groupimg/
+        
+        //時間
+        let interval = Date.timeIntervalSinceReferenceDate
+        //                let docDir = NSHomeDirectory() + "/Documents"
+        
+//        let imgRelativePath = "/saveimg/\(app.account!)_\(interval).jpg"
+        
+        //圖片的命名(其路徑含名稱)
+//        let imgFile = "\(docDir)\(imgRelativePath)"
+//        print("imgFile:\(imgFile)")
+        //pathString to url
+//        let urlFilePath = URL(fileURLWithPath: imgFile)
+        
+//        var account = "account1"
+//        var groupid = "gid1"
+//        
+//        let c9Path = "https://together-seventsai.c9users.io/photo/groupimg/"
+//        let imgFilePath = "\(c9Path)\(account)_\(groupid)_\(interval).jpg"
+//        
+//        let urlImgFilePath = URL(fileURLWithPath: imgFilePath)
+//        print(urlImgFilePath)
+//        
+//        do {
+//            //將data 存下來
+//            
+//            
+//            try data?.write(to: urlImgFilePath)
+//            
+//            print("save ok")
+//        }catch {
+//            print(error)
+//        }
+
+        
+        
+        
+        
+        
+        
+        
+        
         dismiss(animated: true, completion: nil)
 
     }
